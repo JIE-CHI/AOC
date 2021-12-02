@@ -7,10 +7,10 @@ Created on Wed Dec  1 13:01:27 2021
 """
 
 from pandas import read_excel
-
+import numpy as np
 
 # read input
-file_path = './inputs/day1sonar_sweep.xlsx'
+file_path = './inputs.xlsx'
 sheetname = 'day1' 
 df = read_excel(file_path, sheet_name = sheetname, header=None)
 data = df.iloc[:,0].values
