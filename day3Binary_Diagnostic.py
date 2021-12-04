@@ -9,7 +9,7 @@ Created on Fri Dec  3 13:17:07 2021
 from pandas import read_excel
 import numpy as np
 # read input
-file_path = './inputs.xlsx'
+file_path = './inputs/inputs.xlsx'
 sheetname = 'day3' 
 df = read_excel(file_path, sheet_name = sheetname, header=None)
 data = df.iloc[:,0].to_numpy(dtype='str')

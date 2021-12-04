@@ -8,7 +8,7 @@ Created on Thu Dec  2 16:26:53 2021
 from pandas import read_excel
 import numpy as np
 # read input
-file_path = './inputs.xlsx'
+file_path = './inputs/inputs.xlsx'
 sheetname = 'day2' 
 df = read_excel(file_path, sheet_name = sheetname, header=None)
 data = df.iloc[:,0].values
