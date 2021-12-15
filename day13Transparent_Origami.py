@@ -7,7 +7,7 @@ Created on Wed Dec 15 14:55:56 2021
 """
 
 f = open('./inputs/day13.txt', 'r').read()
-positions, instructions = f.split('\n\n')
+positions, instructions = f.strip().split('\n\n')
 dots = []
 for i in positions.split('\n'):
     x,y = map(int, i.split(','))
