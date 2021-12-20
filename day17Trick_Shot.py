@@ -6,7 +6,7 @@ Created on Fri Dec 17 16:44:50 2021
 @author: jiechi
 """
 import math
-#x=119..176, y=-141..-84
+
 test = [20, 30, -10, -5]
 x1, x2, y1, y2= [119, 176, -141, -84]
 n_min = math.floor(math.sqrt(176 * 2)) 
