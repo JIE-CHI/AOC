@@ -20,7 +20,7 @@ def check1(str1):
     return False
     
 def check2(str1):
-    return len(set('iol')&set(str1)) == 0
+    return len(set('iol') & set(str1)) == 0
 
 def check3(str1):
     count = 0
