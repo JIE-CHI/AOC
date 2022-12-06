@@ -12,7 +12,7 @@ file_in = 'inputs/day05.txt'
 text = open(file_in).readlines()
 text = [i.strip() for i in text]
 elem = {}
-command = []
+
 for i in range(9):
     elem[i+1] = []
 
