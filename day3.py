@@ -2,7 +2,7 @@
 # @Author: Jie Chi
 # @Date:   2023-12-03 16:24:17
 # @Last Modified by:   Jie Chi
-# @Last Modified time: 2023-12-03 17:28:09
+# @Last Modified time: 2023-12-03 17:42:54
 
 grids = []
 with open('inputs/day3.txt') as f:
@@ -31,11 +31,9 @@ def get_num (x,y,grids):
         else:
             break
     i = y
-
     while(i<len(grids[0])-1):
         if grids[x][i+1].isdigit():
             nums += grids[x][i+1]
-
             i+=1
         else:
             break
@@ -50,7 +48,6 @@ def check_neighbour(x,y,grids):
                 nums.append(get_num (x-1,y-1,grids))
             if y < len(grids[0])-1 and grids[x-1][y+1].isdigit():
                 nums.append( get_num (x-1,y+1,grids))
-
     if x < len(grids) - 1:
         if grids[x+1][y].isdigit():
             nums.append(get_num (x+1,y,grids))
@@ -80,7 +77,6 @@ for x,line in enumerate(grids):
                 if (n[1],n[2]) not in visited:
                     visited.append((n[1],n[2]))
                     p1 += n[0]
-                    
 print(p1)
 print(p2)
 
