@@ -2,7 +2,7 @@
 # @Author: Jie Chi
 # @Date:   2023-12-16 15:58:48
 # @Last Modified by:   Jie Chi
-# @Last Modified time: 2023-12-16 19:03:25
+# @Last Modified time: 2023-12-17 00:50:43
 from collections import deque
 
 lines = open('inputs/day16.txt').readlines()
@@ -38,7 +38,7 @@ def bfs(visited, grids, node):
     visited.add(node)
     queue = deque([node])     
     while queue:          
-        x,y,d = queue.popleft()
+        x,y,d = queue.popleft() 
         for neighbour in find_neighbour(grids,(x,y),d):
             if neighbour not in visited:
                 visited.add(neighbour)
