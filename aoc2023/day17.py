@@ -2,7 +2,8 @@
 # @Author: Jie Chi
 # @Date:   2023-12-18 00:02:07
 # @Last Modified by:   Jie Chi
-# @Last Modified time: 2023-12-28 22:27:50
+# @Last Modified time: 2023-12-29 00:46:19
+from collections import deque,defaultdict
 lines = open('inputs/day17.txt').readlines()
 grids = []
 for line in lines:
@@ -12,7 +13,6 @@ C = len(grids[0])
 S = (0,0)
 E = (R-1, C-1)
 
-from collections import deque,defaultdict
 
 def travel(queue,cost,max_len,p2=False):
     reverse = (0,0)
@@ -56,7 +56,6 @@ def travel(queue,cost,max_len,p2=False):
                         ans = min(ans, cost[i])
             else:
                 ans = min(ans, cost[i])
-
     return ans
 
 cost = defaultdict(lambda: float('inf'))
@@ -66,6 +65,6 @@ queue.append((S,[0,0,0,0]))
 print(travel(queue,cost,3,p2=False))  
 cost.clear()
 cost[(S,(0,0,0,0))] = 0
-queue = deque()
+queue.clear()
 queue.append((S,[0,0,0,0]))
 print(travel(queue,cost,10,p2=True))  
