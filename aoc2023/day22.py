@@ -2,7 +2,9 @@
 # @Author: Jie Chi
 # @Date:   2024-01-02 18:54:30
 # @Last Modified by:   Jie Chi
-# @Last Modified time: 2024-01-03 00:48:04
+# @Last Modified time: 2024-01-03 14:30:04
+from collections import deque
+
 bricks = []
 with open('inputs/day22.txt') as f:
     for line in f:
@@ -36,39 +38,41 @@ def fall(brick, current):
 
 for i,brick in enumerate(bricks):
     current, bricks[i] = fall(brick, current)
-    
-bricks = sorted(bricks, key=lambda x: x[0][2])
-p1 = 0
-for i,brick in enumerate(bricks):
+bricks = sorted(bricks, key=lambda x: x[0][2])    
+
+from collections import defaultdict
+brick_support = defaultdict(set)
+support_brick = defaultdict(set)
+for i,brick in enumerate(bricks[0:-1]):
     x1,y1,z1 = brick[0]
     x2,y2,z2 = brick[1]
-    plane = np.zeros((X+1,Y+1))
-    found = True
-    for ii, next_brick in enumerate(bricks):
+    for next_brick in bricks[i+1::]:
         nextx1,nexty1,nextz1 = next_brick[0]
         nextx2,nexty2,nextz2 = next_brick[1]
-        assert nextz2 >= nextz1
-        if nextz2 < z2:
-            continue
-        if nextz1 -1 > z2:
+        if nextz1 == z2+1 and max(nextx1,x1) <= min(nextx2,x2) and max(nexty1,y1) <= min(nexty2,y2):
+            brick_support[tuple(brick)].add(tuple(next_brick))
+            support_brick[tuple(next_brick)].add(tuple(brick))
+        elif nextz1 > z2+1:
             break
-        elif nextz2 == z2 and brick!=next_brick:
-            for x in range(nextx1,nextx2+1):
-                for y in range(nexty1, nexty2+1):
-                    plane[x][y] = 1
-           # print(brick, plane)
-        elif nextz1 - 1 == z2:
-            found = False
-            for x in range(nextx1,nextx2+1):
-                for y in range(nexty1, nexty2+1):
-                    if plane[x][y] == 1:
-                        found = True
-                        break
-            if not found:
-                break
-    if found:
-        p1 += 1
 
+p1 = 0
+for i in bricks:
+    i = tuple(i)
+    if all(len(support_brick[j]) >1 for j in brick_support[i]):
+        p1 += 1
 print(p1)
 
+p2 = 0
+for i in bricks:
+    queue = deque(tuple(i) for j in brick_support[tuple(i)] if len(support_brick[j]) ==1)
+    visited = set(queue)
+    visited.add(tuple(i))
+    while queue:
+        brick = queue.popleft()
+        for k in brick_support[brick] - visited:
+            if support_brick[k] <= visited:
+                queue.append(k)
+                visited.add(k)
+    p2 += len(visited)-1
+print(p2)
 
