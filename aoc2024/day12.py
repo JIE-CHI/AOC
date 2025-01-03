@@ -7,18 +7,27 @@ Created on Sun Dec 15 19:48:13 2024
 """
 from collections import deque
 f_in = open('inputs/day12.txt').readlines()
-f_in = open('test.txt').readlines()
+# f_in = open('test.txt').readlines()
 
 G = []
 for line in f_in:
     G.append(list(line.strip()))
 
-def get_price(r):
+def get_price(r, p1 = True):
     area = len(r)
     tot = area * 4
     for (x,y) in r:
         for (dx,dy) in [(-1,0), (1,0), (0,-1), (0,1)]:
             if (x+dx, y+dy) in r:
+                tot -= 1
+        if not p1:
+            if (x+1,y) in r and (x,y-1) not in r and (x+1,y-1) not in r: 
+                tot -= 1
+            if (x,y+1) in r and (x-1,y) not in r and (x-1,y+1) not in r: 
+                tot -= 1
+            if (x+1,y) in r and (x,y+1) not in r and (x+1,y+1) not in r: 
+                tot -= 1
+            if (x,y+1) in r and (x+1,y) not in r and (x+1,y+1) not in r: 
                 tot -= 1
     return tot * area
 
@@ -52,5 +61,7 @@ for x in range(len(G)):
 p1 = 0 
 for r in R:
     p1 += get_price(r)
-        
-print(p1)
+p2 = 0 
+for r in R:
+    p2 += get_price(r, False)      
+print(p1, p2)
