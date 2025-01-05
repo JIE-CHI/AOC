@@ -8,7 +8,7 @@ Created on Sat Jan  4 00:32:38 2025
 import heapq
 from copy import deepcopy
 
-def bfs(G, s, p1 = True):
+def solve(G, s, p1 = True):
     q = [s]
     visited = set()
     lowest = float('inf')
@@ -45,7 +45,7 @@ for x,line in enumerate(f_in):
         end = (x, line.index('E'))
     G.append(list(line.strip()))
     
-print(bfs(G,start, p1=True))
-print(len(bfs(G,start, p1=False)))
+print(solve(G,start, p1=True))
+print((solve(G,start, p1=False)))
 
             
